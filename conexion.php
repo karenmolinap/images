@@ -23,11 +23,22 @@
 	
 	if($tipo=="a"){ // Si es un query
 		if ($conn->query($sql) === TRUE) {
-			echo "Registro Insertado de Manera Exitosa"."\n";
+			//echo "Registro Insertado de Manera Exitosa"."\n";
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
-	}else{ // Si es un result
+	}elseif($tipo=="b"){ // Result de ACTOR,DIRECTOR,GENERO
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+				echo $row["id"].",". $row["nombre"]. "\n";
+			}
+		} else {
+			echo "No hay resultados";
+		}
+	}elseif($tipo=="c"){ // Result de SOCIO
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
@@ -36,12 +47,65 @@
 				echo $row["idSocio"].",". $row["nombre"].",". $row["direccion"].",". $row["telefono"]. "\n";
 			}
 		} else {
-			echo "0 results";
+			echo "No hay resultados";
+		}
+	}elseif($tipo=="d"){ // Result de FAV ACTOR, FAV DIRE, FAV GENE, ESPERA, CINTAS, PEL ACTORES
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+				echo $row["id"].",". $row["iddos"].",". $row["idtres"]."\n";
+			}
+		} else {
+			echo "No hay resultados";
+		}
+	}elseif($tipo=="e"){ // Result de PELICULAS
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+				echo $row["idPelicula"].",". $row["nombre"].",". $row["idDirector"].",". $row["idGenero"]."\n";
+			}
+		} else {
+			echo "No hay resultados";
+		}
+	}elseif($tipo=="f"){ // Result de PRESTAMOS
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+				echo $row["idPrestamo"].",". $row["fecha"].",". $row["idSocio"].",". $row["idCinta"]."\n";
+			}
+		} else {
+			echo "No hay resultados";
+		}
+	}elseif($tipo=="g"){ // Result de PRESTAMOS
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+				echo $row["idDevolucion"].",". $row["fecha"].",". $row["idPrestamo"]."\n";
+			}
+		} else {
+			echo "No hay resultados";
+		}
+	}elseif($tipo=="h"){ // CONCAT Spinner
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			// output data of each row
+			while($row = $result->fetch_assoc()) {
+				echo $row["nombre"]."\n";
+			}
+		} else {
+			echo "No hay resultados";
 		}
 	}
-
 	$conn->close();
-	die ('Finalizando...');
+	die ('');
 
  
 ?>
